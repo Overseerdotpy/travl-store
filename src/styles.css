@@ -233,8 +233,8 @@ header.gb-wrap{position:sticky;top:0;z-index:50;padding:12px 12px 0;pointer-even
 .hs-bar i{display:block;height:100%;width:0;background:var(--accent)}
 .hs-track{flex:1;display:flex;width:300%;min-height:0;will-change:transform}
 .hs-p{flex:0 0 calc(100% / 3);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center;padding:0 max(24px,calc((100vw - 1132px) / 2)) 12vh}
-.hs-copy{display:flex;flex-direction:column;gap:18px}
-.hs-copy h3{font-size:clamp(44px,6.4vw,104px);font-weight:700;letter-spacing:-.03em;line-height:.95}
+.hs-copy{display:flex;flex-direction:column;gap:18px;container-type:inline-size}
+.hs-copy h3{font-size:clamp(44px,min(6.4vw,17cqw),104px);font-weight:700;letter-spacing:-.03em;line-height:.95}
 .hs-copy p{color:var(--fg-2);max-width:30em}
 .hs-n{font-size:14px;color:var(--fg-muted)}
 .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:4px 0 0}
