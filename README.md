@@ -3,7 +3,7 @@
 **A concept storefront for a 75% mechanical keyboard, built around one number: 4.0 mm of travel.**
 Vanilla HTML, CSS and JavaScript. No framework, no bundler, 50 automated tests.
 
-[Live demo (Claude-hosted)](https://claude.ai/artifact/Be32SvFBJbP5U5JMHJTbkK) · GitHub Pages: `https://YOUR-USERNAME.github.io/travl/` (after you enable Pages, see below)
+[Live demo (Claude-hosted)](https://claude.ai/artifact/Be32SvFBJbP5U5JMHJTbkK) · GitHub Pages: `https://overseerdotpy.github.io/travl-store/`
 
 ![TRAVL hero: the wordmark lit by the cursor](docs/screenshots/01-hero.jpg)
 
