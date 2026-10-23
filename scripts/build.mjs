@@ -1,6 +1,6 @@
 // Builds dist/index.html: one self-contained file (HTML + CSS + JS + images + clip + wordmark).
 // No bundler on purpose: the JS sections in src/js are concatenated in filename order inside one IIFE.
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, cpSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -35,5 +35,7 @@ const html = text('src/index.html')
 mkdirSync(join(root, 'dist'), { recursive: true });
 writeFileSync(join(root, 'dist/index.html'), html);
 writeFileSync(join(root, 'dist/.nojekyll'), '');
+// Pages that are already complete (the scroll story, the case study) live in static/ and are copied as they are.
+if (existsSync(join(root, 'static'))) cpSync(join(root, 'static'), join(root, 'dist'), { recursive: true });
 const kb = (n) => (n / 1024).toFixed(0) + ' KB';
 console.log(`dist/index.html  ${kb(statSync(join(root, 'dist/index.html')).size)}  (images ${kb(Buffer.byteLength(JSON.stringify(images)))}, clip ${kb(clip.length)}, css ${kb(text('src/styles.css').length)}, js ${kb(app.length)})`);

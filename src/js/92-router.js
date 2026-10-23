@@ -5,6 +5,7 @@ let lastRoute='',pendingScroll=null;
 function render(quiet){
   hsFn=null;
   let r=route();const app=$('#app');
+  if(r==='build'){r='home';pendingScroll='cfg'}   /* shareable shortcut: #build opens the configurator */
   const prod=CAT.find(p=>p.slug===r);
   if(!prod&&!V[r])r='home';
   if(r==='account'&&!acct()){loginNote='Sign in to see your account.';r='login'}

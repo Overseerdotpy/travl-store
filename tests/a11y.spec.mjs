@@ -21,6 +21,9 @@ for (const scheme of ['dark', 'light']) {
       if (needsCart) await addBoard(page);
       await page.goto(url);
       await page.waitForTimeout(1500); // let typing / rise animations finish
+      // A mid-fade toast ("Added to cart") is half transparent, which axe would measure as low contrast.
+      await page.waitForFunction(() => !document.querySelector('#toast.show'));
+      await page.waitForTimeout(400);
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze();
       const blocking = violations.filter((v) => ['serious', 'critical'].includes(v.impact));
       const summary = blocking.map((v) => `${v.id} (${v.impact}): ${v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ')}`);
