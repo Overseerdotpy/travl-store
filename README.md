@@ -1,7 +1,7 @@
 # TRAVL
 
 **A concept storefront for a 75% mechanical keyboard, built around one number: 4.0 mm of travel.**
-Vanilla HTML, CSS and JavaScript. No framework, no bundler, 50 automated tests.
+Vanilla HTML, CSS and JavaScript. No framework, no bundler, 56 automated tests.
 
 [Live demo (Claude-hosted)](https://claude.ai/artifact/Be32SvFBJbP5U5JMHJTbkK) · GitHub Pages: `https://overseerdotpy.github.io/travl-store/`
 
@@ -38,7 +38,7 @@ npm start          # builds, then serves dist/ at http://localhost:4173
 
 ```bash
 npx playwright install chrome   # once: the hero clip is H.264, which Playwright's bundled Chromium can't decode
-npm test                        # builds, then runs all 50 tests
+npm test                        # builds, then runs all 56 tests
 npm run report                  # open the HTML report
 ```
 
@@ -69,7 +69,7 @@ docs/                 DECISIONS.md and screenshots
 
 ## Testing
 
-50 Playwright tests, run in real Chrome:
+56 Playwright tests, run in real Chrome:
 
 | Spec | What it proves |
 | --- | --- |
