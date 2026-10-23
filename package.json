@@ -1,0 +1,26 @@
+{
+  "name": "travl",
+  "version": "1.0.0",
+  "description": "TRAVL: a concept mechanical-keyboard storefront with a product configurator, cart, checkout and accounts. Vanilla HTML, CSS and JavaScript, built to one self-contained file.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && http-server dist -p 4173 -c-1",
+    "test": "npm run build && playwright test",
+    "test:a11y": "npm run build && playwright test tests/a11y.spec.mjs",
+    "report": "playwright show-report",
+    "lighthouse": "npm run build && node scripts/lighthouse.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.56.0",
+    "chrome-launcher": "^1.2.2",
+    "http-server": "^14.1.1",
+    "lighthouse": "^13.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
