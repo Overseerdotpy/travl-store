@@ -1,7 +1,7 @@
 # TRAVL
 
 **A concept storefront for a 75% mechanical keyboard, built around one number: 4.0 mm of travel.**
-Vanilla HTML, CSS and JavaScript. No framework, no bundler, 65 automated tests.
+Vanilla HTML, CSS and JavaScript. No framework, no bundler, 65 browser tests, plus a Python test suite for the asset pipeline.
 
 [Live demo](https://overseerdotpy.github.io/travl-store/) · [Scroll story](https://overseerdotpy.github.io/travl-store/story/) · [Case study](https://overseerdotpy.github.io/travl-store/case-study/)
 
@@ -44,6 +44,14 @@ npm run report                  # open the HTML report
 
 Already have a Chrome or Chromium with H.264? Skip the install and run `CHROME_PATH=/path/to/chrome npm test`.
 
+Python tests for the wordmark generator (Python 3.10 or newer):
+
+```bash
+pip install -r tools/requirements.txt
+npm i --no-save @fontsource/montserrat   # the font the generator reads
+pytest
+```
+
 ## Project structure
 
 ```
@@ -62,6 +70,7 @@ src/
 assets/               images, the press clip, the wordmark outlines (see ASSETS.md)
 scripts/              build.mjs (no dependencies), lighthouse.mjs
 tests/                Playwright specs
+tests_py/             pytest suite for the wordmark generator and wordmark.json
 tools/                make_wordmark.py (how the wordmark outlines were generated)
 docs/                 DECISIONS.md and screenshots
 .github/workflows/    CI, informational Lighthouse run, GitHub Pages deploy
@@ -82,6 +91,17 @@ docs/                 DECISIONS.md and screenshots
 | `a11y` | axe-core (WCAG 2.0/2.1 A and AA) on six routes in dark and light |
 
 The bento tests were checked against the pre-fix build: they fail there with the measured numbers (content moved 20.3 px, row heights `[250, 259]`) and pass now.
+
+### Python: the wordmark pipeline
+
+The hero wordmark is generated, not drawn: `tools/make_wordmark.py` shapes "TRAVL" with HarfBuzz from real Montserrat Bold outlines and writes SVG paths to `assets/wordmark.json`. A pytest suite (`tests_py/`) guards both halves:
+
+| Group | What it proves |
+| --- | --- |
+| The committed JSON (no dependencies) | exactly the keys the page reads; viewBox matches width and height; one well-formed path per letter; every point inside the viewBox; ink touches all four edges (no stray margin); letters run left to right |
+| The generator (needs the font) | regenerating reproduces the committed geometry; HarfBuzz kerning tightens the A-V pair; tracking adds the same space after every letter; the y axis is flipped into SVG space; text with no ink is rejected; the CLI writes the file |
+
+The suite was checked by breaking the generator on purpose (removing the y flip, turning kerning off, hand-editing the JSON): each break fails at least one test.
 
 ## Measured quality
 
